@@ -10,3 +10,14 @@ keskustelusovelluksessa voit:
 - Hakea viestejä tietyllä sanalla.
 - Lisätä tai poistaa keskustelualueita, jos on valinnut ylläpito-oikeudet.
 - Tehdä salasia alueita ja määrittää ketkä voivat nähdä sen, jos on valinnut ylläpito-oikeudet
+
+
+Sovelluksen toiminta tällä hetkellä:
+- Voi rekisteröidä käyttäjän.
+- Voi kirjautua sisään ja ulos.
+- Voi luoda uusi keskustelualueita.
+
+Seuraavaksi:
+- viestien kirjoittaminen keskustelualueille.
+- viestien ja alueiden poistaminen.
+- salaisten alueiden luominen.
