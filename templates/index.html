@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+{% if session.username %}
+<h2>Tervetuloa {{session.username}}</h2>
+<br>
+<h3>Keskustelualueet</h3>
+{% for forum in forums %}
+<a href="/forums/{{forum.id}}">{{forum.name}}</a><br>
+{% endfor %}
+<br>
+<br>
+<br>
+<a href="/new_forum">Luo uusi keskustelualue</a>
+<br>
+<a href="/logout">Kirjaudu ulos</a>
+{% endif %}
