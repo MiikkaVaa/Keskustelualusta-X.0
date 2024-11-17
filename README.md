@@ -23,3 +23,4 @@ Seuraavaksi:
 - salaisten alueiden luominen.
 
 Huomaa: Koodia ei ole jaettu vielä moduuleihin.
+        Lisäksi koodi hajosi jostain syystä, kun tein nuo requirements.txt kansion. Viimeksi kuitenkin toimi. Import viestit flaskissä nnäkyvät harmaina??
