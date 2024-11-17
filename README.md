@@ -21,3 +21,5 @@ Seuraavaksi:
 - viestien kirjoittaminen keskustelualueille.
 - viestien ja alueiden poistaminen.
 - salaisten alueiden luominen.
+
+Huomaa: Koodia ei ole jaettu vielä moduuleihin.
