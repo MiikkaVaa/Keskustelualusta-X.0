@@ -17,7 +17,7 @@ CREATE TABLE threads (
     forum_id INTEGER REFERENCES forums(id) ON DELETE CASCADE,
     message TEXT NOT NULL,
     user_created INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    time TIMESTAMP DEFAULT NOW
+    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE messages (
@@ -25,7 +25,7 @@ CREATE TABLE messages (
     thread_id INTEGER REFERENCES threads(id) ON DELETE CASCADE,
     message TEXT NOT NULL,
     user_created INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    time TIMESTAMP DEFAULT NOW
+    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE permissions (
