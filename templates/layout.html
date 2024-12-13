@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<head>
+    <title>{% block title %}Keskustelusovellus X.0{% endblock %}</title>
+</head>
+<body>
+    <header>
+        {% if session.username %}
+        <p> Tervetuloa keskustemaan muiden kanssa, {{session.username}}</p>
+        <p>
+            <a href="/">Etusivulle</a>
+        </p>
+
+        <p>
+            <a href="/logout">Kirjaudu ulos</a>
+        </p>
+        
+        
+        {% else %}
+        <p>
+            <a href="/login">Kirjaudu sisään</a>
+        </p>
+        <p>
+            <a href="/register">Rekisteröidy </a>
+        </p>
+        {% endif %}
+        <hr>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
