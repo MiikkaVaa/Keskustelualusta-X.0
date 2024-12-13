@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>{{thread.message}}</h2>
+<br>
+<h3>Vastaukset</h3>
+<ul>
+    {% for message in messages %}
+        <li>
+            <p>{{message.message}}</p>
+            <p>Kirjoittanut: {{message.user_created}}, aika: {{message.time}}</p>
+        </li>
+    {% endfor %}
+</ul>
+
+<h3>Uusi viesti</h3>
+<form action="/new_message" method="POST">
+    Viesti: <textarea name="message" required></textarea>
+    <input type="hidden" name="forum_id" value="{{forum.id}}">
+    <input type="hidden" name="thread_id" value="{{thread.id}}">
+    <br>
+    <input type="submit" value="Luo uusi viesti">
+</form>
+<hr>
+
+<h3>Hae viestejä</h3>
+<form action="/search_messages" method="GET">
+    Hakusana: <input type="text" name="query" required>
+    <br>
+    <input type="hidden" name="forum_id" value="{{forum.id}}">
+    <input type="hidden" name="thread_id" value="{{thread.id}}">
+    <input type="submit" value="Hae">
+</form>
+{% endblock %}
