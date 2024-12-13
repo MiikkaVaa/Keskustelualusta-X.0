@@ -1,7 +1,36 @@
 <!DOCTYPE html>
+{% extends "layout.html" %}
 
-<title>{{forum.name}}</title>
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<h2>{{forum.name}}</h2>
 <br>
-<p>Keskustelualue</p>
+<h3>Viestiketjut</h3>
+<ul>
+    {% for thread in threads %}
+        <li>
+            <a href="/forum/{{forum.id}}/thread/{{thread.id}}">{{thread.message}}</a>
+        </li>
+    {% endfor %}
+</ul>
 <br>
-<a href="/">Takaisin</a>
+<h3>Luo uusi viestiketju</h3>
+<form action="/new_thread" method="POST">
+    Viestiketjun aloitus: <textarea name="message" required></textarea>
+    <br>
+    <input type="hidden" name="forum_id" value="{{forum.id}}">
+    <input type="submit" value="Luo uusi viestiketju">
+</form>
+<hr>
+
+<h3>Hae viestiketjuja</h3>
+<form action="/search_threads" method="GET">
+    Hakusana: <input type="text" name="query" required>
+    <br>
+    <input type="hidden" name="forum_id" value="{{forum.id}}">
+    <input type="submit" value="Hae">
+</form>
+
+{% endblock %}
