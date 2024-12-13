@@ -1,5 +1,11 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 
+{% extends "layout.html" %}
+{% block title %}Kirjaudu sisään{% endblock %}
+
+{% block content %}
+
+<h2>Kirjaudu sisään sovellukseen</h2>
 <form action="/login" method="POST">
     Käyttäjätunnus: <input type="text" name="username" required>
     <br>
@@ -7,3 +13,5 @@
     <br>
     <input type="submit" value="Kirjaudu">
 </form>
+<p>Eikö sinulla ole käyttäjää? <a href="/register">Rekisteröidy</a></p>
+{% endblock %}
