@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block title %}Rekisteröidy{% endblock %}
+
+{% block content %}
 
 <h2>Rekisteröidy</h2>
 <form action="/register" method="POST">
@@ -6,7 +11,11 @@
     <br>
     Salasana: <input type="password" name="password1" required>
     <br>
-    Vahvista salasana: <input type="password" name="password2" required>
+    Toista salasana: <input type="password" name="password2" required>
+    <br>
+    Admin: <input type="checkbox" name="is_admin">
     <br>
     <input type="submit" value="Rekisteröidy">
 </form>
+<p>Oletko rekisteröitynyt jo? <a href="/login">Kirjaudu sisään</a></p>
+{% endblock %}
