@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+{% extends "layout.html" %}
 
-<title>Virhe!</title>
-{{message}}
+{% block content %}
+
+<h3>Virhe!</h3>
+<p>{{message}}</p>
 <a href="/">Etusivulle</a>
+{% endblock %}
