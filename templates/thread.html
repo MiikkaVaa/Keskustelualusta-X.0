@@ -2,8 +2,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
-<h2>{{thread.message}}</h2>
+<h2>Foorumi - {{thread.message}}</h2> 
+<a href="/forum/{{forum.id}}">Takaisin foorumiin</a>
 <br>
 <h3>Vastaukset</h3>
 <ul>

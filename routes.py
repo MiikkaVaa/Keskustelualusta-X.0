@@ -231,3 +231,4 @@ def add_permission(forum_id):
     
     else:
         return redirect("/login")
+    

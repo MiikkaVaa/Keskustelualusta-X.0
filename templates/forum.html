@@ -2,17 +2,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
 <h1>{{forum.name}}</h1>
 <br>
-{% if forum.private and forum.user_id == session.id %}
-Lisää oikeuksia käyttäjälle nähdä tämä foorumi
-<form action="/forum/{{forum.id}}/add_permission" method="POST">
-    <input type="text" name="username" required>
-    <br>
-    <input type="submit" value="Lisää oikeus">
-</form>
-{% endif %}
 
 <h3>Viestiketjut</h3>
 <ul>
@@ -32,19 +23,28 @@ Lisää oikeuksia käyttäjälle nähdä tämä foorumi
         </li>
     {% endfor %}
 </ul>
-<br>
-<h5>Luo uusi viestiketju</h5>
+<hr>
+<h5>Luo uusi viestiketju:</h5>
 <form action="/new_thread" method="POST">
-    Viestiketjun aloitus: <textarea name="message" maxlength="200" required></textarea>
+    <textarea name="message"rows="5" cols="50" maxlength="200" required></textarea>
     <br>
     <input type="hidden" name="forum_id" value="{{forum.id}}">
     <input type="submit" value="Luo uusi viestiketju">
 </form>
 <hr>
+{% if forum.private and forum.user_id == session.id %}
+<h5>Kirjoita käyttäjän nimi jolle haluat antaa oikeuden katsoa tätä foorumia!</h5>
+<form action="/forum/{{forum.id}}/add_permission" method="POST">
+    <input type="text" name="username" required>
+    <br>
+    <input type="submit" value="Lisää oikeus">
+</form>
+{% endif %}
 
-<h3>Hae viestiketjuja</h3>
+<hr>
+
 <form action="/search_threads" method="GET">
-    Hakusana: <input type="text" name="query" required>
+    Hae viestiketjua: <input type="text" name="query" required>
     <br>
     <input type="hidden" name="forum_id" value="{{forum.id}}">
     <input type="submit" value="Hae">
