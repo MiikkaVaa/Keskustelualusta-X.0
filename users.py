@@ -27,7 +27,7 @@ def register(username, password1, password2, is_admin = False):
         return message
     
     if password1 != password2:
-        message = "Salasanat menivät väärin"
+        message = "Salasanat eivät täsmää"
         return message
     
     password_hash = generate_password_hash(password1)
@@ -61,3 +61,13 @@ def add_permission(forum_id, user_id):
         db.session.commit()
     except:
         return False
+    
+
+# Hae käyttäjän id nimen perusteella
+def id_by_username(username):
+    sql = text("SELECT id FROM users WHERE username = :username")
+    result = db.session.execute(sql, {"username": username}).fetchone()
+    if result:
+        return result[0]
+    return None
+    

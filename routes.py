@@ -202,16 +202,21 @@ def delete():
 def add_permission(forum_id):
     user_id = session.get("id")
     if user_id:
-        target = request.form["user_id"]
+        target_username = request.form["username"]
+        target_id = users.id_by_username(target_username)
         forum = messages.get_forum(forum_id)
-
+        forum_user_id = forum[2]
+        
         if not forum:
             return render_template("wrong.html", message = "Sivua ei löytynyt")
+        
+        if not target_id:
+            return render_template("wrong.html", message = "Käyttäjää ei löytynyt")
 
-        if forum["user_id"] != user_id:
+        if forum_user_id != user_id:
             return render_template("wrong.html", message = "Sinulla ei ole oikeutta lisätä oikeuksia")
         
-        users.add_permission(forum_id, target)
+        users.add_permission(forum_id, target_id)
         return redirect(f"/forum/{forum_id}")
     
     else:

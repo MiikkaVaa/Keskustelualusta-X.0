@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 {% extends "layout.html" %}
 
-{% block title %}{% endblock %}
-
 {% block content %}
 
 <h2>{{forum.name}}</h2>
 <br>
-<h3>Viestiketjut</h3>
+{% if forum.private and forum.user_id == session.id %}
+Lisää oikeuksia käyttäjälle nähdä tämä foorumi
+<form action="/forum/{{forum.id}}/add_permission" method="POST">
+    <input type="text" name="username" required>
+    <br>
+    <input type="submit" value="Lisää oikeus">
+</form>
+{% endif %}
+
+<h4>Viestiketjut</h4>
 <ul>
     {% for thread in threads %}
         <li>
