@@ -11,6 +11,13 @@
         <li>
             <p>{{message.message}}</p>
             <p>Kirjoittanut: {{message.user_created}}, aika: {{message.time}}</p>
+            {% if session.is_admin or message.user_created == session.id %}
+            <form action="/delete" method="POST">
+                <input type="hidden" name="type" value="message">
+                <input type="hidden" name="id" value="{{message.id}}">
+                <button type="submit">Poista</button>
+            </form>
+            {% endif %}
         </li>
     {% endfor %}
 </ul>

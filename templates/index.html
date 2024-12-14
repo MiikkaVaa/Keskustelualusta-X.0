@@ -9,6 +9,13 @@
     {% for forum in forums %}
         <li>
             <a href="/forum/{{forum.id}}">{{forum.name}}</a>
+            {% if session.is_admin %}
+            <form action="/delete" method="POST">
+                <input type="hidden" name="type" value="forum">
+                <input type="hidden" name="id" value="{{forum.id}}">
+                <button type="submit">Poista</button>
+            </form>
+            {% endif %}
         </li>
     {% endfor %}
 </ul>

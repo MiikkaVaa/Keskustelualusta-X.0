@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h2>{{forum.name}}</h2>
+<h1>{{forum.name}}</h1>
 <br>
 {% if forum.private and forum.user_id == session.id %}
 Lisää oikeuksia käyttäjälle nähdä tämä foorumi
@@ -14,16 +14,23 @@ Lisää oikeuksia käyttäjälle nähdä tämä foorumi
 </form>
 {% endif %}
 
-<h4>Viestiketjut</h4>
+<h3>Viestiketjut</h3>
 <ul>
     {% for thread in threads %}
         <li>
             <a href="/forum/{{forum.id}}/thread/{{thread.id}}">{{thread.message}}</a>
+            {% if session.is_admin or thread.user_created == session.id %}
+            <form action="/delete" method="POST">
+                <input type="hidden" name="type" value="thread">
+                <input type="hidden" name="id" value="{{thread.id}}">
+                <button type="submit">Poista</button>
+            </form>
+            {% endif %}
         </li>
     {% endfor %}
 </ul>
 <br>
-<h3>Luo uusi viestiketju</h3>
+<h5>Luo uusi viestiketju</h5>
 <form action="/new_thread" method="POST">
     Viestiketjun aloitus: <textarea name="message" required></textarea>
     <br>

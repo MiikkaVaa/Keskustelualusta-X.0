@@ -7,22 +7,11 @@
     <header>
         {% if session.username %}
         <p> Tervetuloa keskustemaan muiden kanssa, {{session.username}}</p>
-        <p>
-            <a href="/">Etusivulle</a>
-        </p>
-
-        <p>
-            <a href="/logout">Kirjaudu ulos</a>
-        </p>
+            <a href="/">Etusivulle</a> | <a href="/logout">Kirjaudu ulos</a>
         
         
         {% else %}
-        <p>
-            <a href="/login">Kirjaudu sisään</a>
-        </p>
-        <p>
-            <a href="/register">Rekisteröidy </a>
-        </p>
+            <a href="/login">Kirjaudu sisään</a> | <a href="/register">Rekisteröidy </a>
         {% endif %}
     
     </header>
