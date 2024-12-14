@@ -22,12 +22,25 @@ def register(username, password1, password2, is_admin = False):
     sql = text("SELECT * FROM users WHERE username = :username")
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
+
+    if not username or not password1:
+        message = "Laita käyttöjätunnus ja salasana"
+        return message
+
     if user:
         message = "Käyttäjätunnus on jo käytössä"
         return message
     
     if password1 != password2:
         message = "Salasanat eivät täsmää"
+        return message
+    
+    if len(username) > 20:
+        message = "Käyttäjätunnus pitää olla alle 20 merkkiä pitkä"
+        return message
+
+    if len(password1) > 30:
+        message = "Salasanan pitää olla alle 30 merkkiä pitkä"
         return message
     
     password_hash = generate_password_hash(password1)

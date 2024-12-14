@@ -13,7 +13,7 @@
             <form action="/delete" method="POST">
                 <input type="hidden" name="type" value="forum">
                 <input type="hidden" name="id" value="{{forum.id}}">
-                <button type="submit">Poista</button>
+                <button type="submit" class="delete">Poista</button>
             </form>
             {% endif %}
         </li>
@@ -23,7 +23,7 @@
     {% if session.is_admin %}
     <h2>Uusi foorumi</h2>
     <form action="/new_forum" method="POST">
-        Keskustelualueen nimi: <input type="text" name="name" required>
+        Keskustelualueen nimi: <input type="text" name="name" maxlength="20" required>
         <br>
         Salainen: <input type="checkbox" name="private">
         <br>

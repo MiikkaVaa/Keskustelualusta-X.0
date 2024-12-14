@@ -7,11 +7,11 @@
 
 <h2>Rekisteröidy</h2>
 <form action="/register" method="POST">
-    Käyttäjätunnus: <input type="text" name="username" required>
+    Käyttäjätunnus: <input type="text" name="username" maxlength="20" required>
     <br>
-    Salasana: <input type="password" name="password1" required>
+    Salasana: <input type="password" name="password1" maxlength="30" required>
     <br>
-    Toista salasana: <input type="password" name="password2" required>
+    Toista salasana: <input type="password" name="password2" maxlength="30" required>
     <br>
     Admin: <input type="checkbox" name="is_admin">
     <br>

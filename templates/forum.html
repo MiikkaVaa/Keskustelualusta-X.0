@@ -18,12 +18,15 @@ Lisää oikeuksia käyttäjälle nähdä tämä foorumi
 <ul>
     {% for thread in threads %}
         <li>
-            <a href="/forum/{{forum.id}}/thread/{{thread.id}}">{{thread.message}}</a>
+            <p class="text">{{thread.message}}</p>
+            <br>
+            <a href="/forum/{{forum.id}}/thread/{{thread.id}}">Avaa viestiketju</a>
+            <br>
             {% if session.is_admin or thread.user_created == session.id %}
             <form action="/delete" method="POST">
                 <input type="hidden" name="type" value="thread">
                 <input type="hidden" name="id" value="{{thread.id}}">
-                <button type="submit">Poista</button>
+                <button type="submit" class="delete">Poista</button>
             </form>
             {% endif %}
         </li>
@@ -32,7 +35,7 @@ Lisää oikeuksia käyttäjälle nähdä tämä foorumi
 <br>
 <h5>Luo uusi viestiketju</h5>
 <form action="/new_thread" method="POST">
-    Viestiketjun aloitus: <textarea name="message" required></textarea>
+    Viestiketjun aloitus: <textarea name="message" maxlength="200" required></textarea>
     <br>
     <input type="hidden" name="forum_id" value="{{forum.id}}">
     <input type="submit" value="Luo uusi viestiketju">

@@ -101,7 +101,10 @@ def new_forum():
 
     name = request.form["name"]
     private = "private" in request.form
-    messages.create_forum(name, user_id, private)
+    wrong = messages.create_forum(name, user_id, private)
+
+    if wrong:
+        return render_template("wrong.html", message = wrong)
     return redirect("/")
 
 
@@ -111,7 +114,11 @@ def new_thread():
     if user_id:
         forum_id = request.form["forum_id"]
         message = request.form["message"]
-        messages.create_thread(forum_id, message, user_id)
+        wrong = messages.create_thread(forum_id, message, user_id)
+        
+        if wrong:
+            return render_template("wrong.html", message = wrong)
+        
         return redirect(f"/forum/{forum_id}")
 
     else:
@@ -125,7 +132,10 @@ def new_message():
         forum_id = request.form["forum_id"]
         thread_id = request.form["thread_id"]
         message = request.form["message"]
-        messages.create_message(thread_id, message, user_id)
+        wrong = messages.create_message(thread_id, message, user_id)
+        if wrong:
+            return render_template("wrong.html", message = wrong)
+        
         return redirect(f"/forum/{forum_id}/thread/{thread_id}")
 
     else:

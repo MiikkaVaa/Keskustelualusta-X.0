@@ -9,13 +9,13 @@
 <ul>
     {% for message in messages %}
         <li>
-            <p>{{message.message}}</p>
+            <p class="text">{{message.message}}</p>
             <p>Kirjoittanut: {{message.user_created}}, aika: {{message.time}}</p>
             {% if session.is_admin or message.user_created == session.id %}
             <form action="/delete" method="POST">
                 <input type="hidden" name="type" value="message">
                 <input type="hidden" name="id" value="{{message.id}}">
-                <button type="submit">Poista</button>
+                <button type="submit" class="delete">Poista</button>
             </form>
             {% endif %}
         </li>
@@ -24,7 +24,7 @@
 
 <h3>Uusi viesti</h3>
 <form action="/new_message" method="POST">
-    Viesti: <textarea name="message" required></textarea>
+    Viesti: <textarea name="message" maxlength="200" required></textarea>
     <input type="hidden" name="forum_id" value="{{forum.id}}">
     <input type="hidden" name="thread_id" value="{{thread.id}}">
     <br>

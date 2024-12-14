@@ -4,6 +4,9 @@ from sqlalchemy.sql import text
 
 # Uusi foorumi
 def create_forum(name, user_id, private=False):
+    if len(name) > 20:
+        return "Foorumin nimi pitää olla alle 20 merkkiä pitkä"
+
     if users.is_admin(user_id):
         sql = text("INSERT INTO forums (name, user_id, private) VALUES (:name, :user_id, :private) RETURNING id")
         result = db.session.execute(sql, {"name": name, "user_id": user_id, "private": private})
@@ -12,18 +15,27 @@ def create_forum(name, user_id, private=False):
         if private:
             users.add_permission(forum_id, user_id)
         db.session.commit()
-        return True
+        return None
     return False
 
 # Uusi ketju foorumille
 def create_thread(forum_id, message, user_id):
+
+    if len(message) > 200:
+        message = "Viestiketjun pitää olla alle 100 merkkiä pitkä"
+        return message
+
     sql = text("INSERT INTO threads (forum_id, message, user_created) VALUES (:forum_id, :message, :user_id)")
     db.session.execute(sql, {"forum_id": forum_id, "message": message, "user_id": user_id})
     db.session.commit()
+    return None
 
 
 # Uusi viesti ketjuun
 def create_message(thread_id, message, user_id):
+    if len(message) > 200:
+        return "Viestin tulee olla alle 100 merkkiä pitkä"
+    
     sql = text("INSERT INTO messages (thread_id, message, user_created) VALUES (:thread_id, :message, :user_id)")
     db.session.execute(sql, {"thread_id": thread_id, "message": message, "user_id": user_id})
     db.session.commit()
