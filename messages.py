@@ -5,8 +5,12 @@ from sqlalchemy.sql import text
 # Uusi foorumi
 def create_forum(name, user_id, private=False):
     if users.is_admin(user_id):
-        sql = text("INSERT INTO forums (name, user_id, private) VALUES (:name, :user_id, :private)")
-        db.session.execute(sql, {"name": name, "user_id": user_id, "private": private})
+        sql = text("INSERT INTO forums (name, user_id, private) VALUES (:name, :user_id, :private) RETURNING id")
+        result = db.session.execute(sql, {"name": name, "user_id": user_id, "private": private})
+        forum_id = result.fetchone()[0]
+
+        if private:
+            users.add_permission(forum_id, user_id)
         db.session.commit()
         return True
     return False
@@ -90,14 +94,14 @@ def delete_message(message_id, user_id):
 
 # Viestiketjujen haku
 def search_threads(query):
-    sql = text("SELECT id, forum_id, message FROM threads WHERE message LIKE :query")
+    sql = text("SELECT * FROM threads WHERE message LIKE :query")
     result = db.session.execute(sql, {"query": "%"+query+"%"})
     return result.fetchall()
 
 
 # Viestien haku
 def search_messages(query):
-    sql = text("SELECT id, thread_id, message FROM messages WHERE message LIKE :query")
+    sql = text("SELECT * FROM messages WHERE message LIKE :query")
     result = db.session.execute(sql, {"query": "%"+query+"%"})
     return result.fetchall()
 

@@ -137,6 +137,7 @@ def search_threads():
     user_id = session.get("id")
     if user_id:
         forum_id = int(request.args["forum_id"])
+        forum = messages.get_forum(forum_id)
         query = request.args["query"]
 
         if not forum_id or not query:
@@ -144,7 +145,7 @@ def search_threads():
         
         found_threads = messages.search_threads(query)
         forum_threads = [thread for thread in found_threads if thread[1] == forum_id]
-        return render_template("forum.html", forum_id = forum_id, threads = forum_threads, query = query)
+        return render_template("forum.html", forum = forum, threads = forum_threads, query = query)
     
     else:
         return redirect("/login")
@@ -156,6 +157,8 @@ def search_messages():
     if user_id:
         forum_id = int(request.args["forum_id"])
         thread_id = int(request.args["thread_id"])
+        forum = messages.get_forum(forum_id)
+        thread = messages.get_thread(thread_id)
         query = request.args["query"]
 
         if not thread_id or not query:
@@ -163,7 +166,7 @@ def search_messages():
         
         found_messages = messages.search_messages(query)
         thread_messages = [message for message in found_messages if message[1] == thread_id]
-        return render_template("thread.html", forum_id = forum_id, thread_id = thread_id, messages = thread_messages, query = query)
+        return render_template("thread.html", forum = forum, thread = thread, messages = thread_messages, query = query)
     else:
         return redirect("/login")
     
