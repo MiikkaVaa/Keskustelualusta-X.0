@@ -14,6 +14,7 @@ Keskustelusovelluksessa voit:
 Jatkokehiteltävää:
 - UI hienommaksi
 - Viestin alapuolella näkyvä aika, jolloin viesti on kirjoitettu voisi muokata.
+- Laittaa viestiketjuihin tieto kuinka monta viestiä sen alle on kirjoitettu.
 
 
 Sovelluksen testaaminen:
