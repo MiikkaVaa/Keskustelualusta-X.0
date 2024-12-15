@@ -3,24 +3,41 @@ Tsoha-projekti
 
 # Aiheena on tehdä perinteinen keskustelusovellus.
 
-keskustelusovelluksessa voit:
+Keskustelusovelluksessa voit:
 - Luoda käyttäjän ylläpito-oikeuksilla tai ilman.
 - Luoda viestiketjuja sekä poistaa omia viestiketjujaan.
 - Voi kirjoittaa viestejä
-- Hakea viestejä tietyllä sanalla.
-- Lisätä tai poistaa keskustelualueita, jos on valinnut ylläpito-oikeudet.
-- Tehdä salasia alueita ja määrittää ketkä voivat nähdä sen, jos on valinnut ylläpito-oikeudet
+- Hakea viestejä sekä viestiketjuja  tietyllä sanalla
+- Lisätä tai poistaa foorumeita, jos on valinnut ylläpito-oikeudet.
+- Tehdä salasia foorumeita ja määrittää ketkä voivat nähdä sen, jos on valinnut ylläpito-oikeudet.
+
+Jatkokehiteltävää:
+- UI hienommaksi
+- Viestin alapuolella näkyvä aika, jolloin viesti on kirjoitettu voisi muokata.
 
 
-Sovelluksen toiminta tällä hetkellä:
-- Voi rekisteröidä käyttäjän.
-- Voi kirjautua sisään ja ulos.
-- Voi luoda uusi keskustelualueita.
+Sovelluksen testaaminen:
+Sovellus ei ole testattavissa Fly.io:ssa, ohjeet kuin käynnistää sovellus paikallisesti:
 
-Seuraavaksi:
-- viestien kirjoittaminen keskustelualueille.
-- viestien ja alueiden poistaminen.
-- salaisten alueiden luominen.
+- Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
+  ```
+  DATABASE_URL=<tietokannan-paikallinen-osoite>
+  SECRET_KEY=<salainen-avain>
+  ```
 
-Huomaa: Koodia ei ole jaettu vielä moduuleihin.
-        Lisäksi koodi hajosi jostain syystä, kun tein nuo requirements.txt kansion. Viimeksi kuitenkin toimi. Import viestit flaskissä nnäkyvät harmaina??
+- Aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet seuraavilla komennoilla:
+  ```
+  $ pyhton3 -m venv venv
+  $ source venv/bin/activate
+  $ pip install -r ./requirements.txt
+  ```
+
+- Määritä tietokannan skeema seuraavalla komennolla:
+  ```
+  $ psql < schema.sql
+  ```
+
+- Käynnistä sovellus:
+  ```
+  $ flask run
+  ```
