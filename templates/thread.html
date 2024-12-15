@@ -2,10 +2,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h2>Viesti - {{thread.message}}</h2> 
+<h2>Ketju: {{thread.message}}</h2> 
 <a href="/forum/{{forum.id}}">Takaisin foorumiin</a>
 <br>
-<h3>Vastaukset</h3>
+<h3>Vastaukset:</h3>
 <ul>
     {% for message in messages %}
         <li>
@@ -22,10 +22,10 @@
     {% endfor %}
 </ul>
 
-<h3>Uusi viesti</h3>
+<h5><u>Uusi viesti:</u></h5>
 <form action="/new_message" method="POST">
     <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
-    Viesti: <textarea name="message" maxlength="200" required></textarea>
+    <textarea name="message" rows="5" cols="50" maxlength="200" required></textarea>
     <input type="hidden" name="forum_id" value="{{forum.id}}">
     <input type="hidden" name="thread_id" value="{{thread.id}}">
     <br>
@@ -33,7 +33,7 @@
 </form>
 <hr>
 
-<h3>Hae viestejä</h3>
+<h5>Hae viestejä</h5>
 <form action="/search_messages" method="GET">
     Hakusana: <input type="text" name="query" required>
     <br>

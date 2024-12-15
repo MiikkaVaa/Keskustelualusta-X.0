@@ -24,7 +24,7 @@
     {% endfor %}
 </ul>
 <hr>
-<h5>Luo uusi viestiketju:</h5>
+<h5><u>Luo uusi viestiketju:</u></h5>
 <form action="/new_thread" method="POST">
     <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
     <textarea name="message"rows="5" cols="50" maxlength="200" required></textarea>
@@ -34,8 +34,9 @@
 </form>
 <hr>
 {% if forum.private and forum.user_id == session.id %}
-<h5>Kirjoita käyttäjän nimi jolle haluat antaa oikeuden katsoa tätä foorumia!</h5>
+<h5><u>Kirjoita käyttäjän nimi jolle haluat antaa oikeuden katsoa tätä foorumia!</u></h5>
 <form action="/forum/{{forum.id}}/add_permission" method="POST">
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
     <input type="text" name="username" required>
     <br>
     <input type="submit" value="Lisää oikeus">

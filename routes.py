@@ -220,6 +220,9 @@ def delete():
 
 @app.route("/forum/<int:forum_id>/add_permission", methods=["POST"])
 def add_permission(forum_id):
+    if session.get("csrf_token") != request.form["csrf_token"]:
+        return render_template("wrong.html", message = "Odottamaton virhe")
+
     user_id = session.get("id")
     if user_id:
         target_username = request.form["username"]

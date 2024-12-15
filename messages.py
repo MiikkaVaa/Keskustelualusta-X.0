@@ -57,7 +57,7 @@ def get_threads(forum_id):
 
 # Lista viesteistä ketjussa
 def get_messages(thread_id):
-    sql = text("SELECT id, message, user_created, time FROM messages WHERE thread_id = :thread_id")
+    sql = text("SELECT m.id, m.message, u.username AS user_created, m.time FROM messages m JOIN users u ON m.user_created = u.id WHERE m.thread_id = :thread_id ORDER BY m.time ASC")
     result = db.session.execute(sql, {"thread_id": thread_id})
     return result.fetchall()
 
