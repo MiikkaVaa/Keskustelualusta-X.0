@@ -23,6 +23,7 @@
     {% if session.is_admin %}
     <h3>Uusi foorumi</h3>
     <form action="/new_forum" method="POST">
+        <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
         Keskustelualueen nimi: <input type="text" name="name" maxlength="20" required>
         <br>
         Salainen: <input type="checkbox" name="private">

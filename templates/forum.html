@@ -2,7 +2,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>{{forum.name}}</h1>
+<h1>Foorumi: {{forum.name}}</h1>
 <br>
 
 <h3>Viestiketjut</h3>
@@ -26,6 +26,7 @@
 <hr>
 <h5>Luo uusi viestiketju:</h5>
 <form action="/new_thread" method="POST">
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
     <textarea name="message"rows="5" cols="50" maxlength="200" required></textarea>
     <br>
     <input type="hidden" name="forum_id" value="{{forum.id}}">

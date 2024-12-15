@@ -2,6 +2,7 @@ from app import app
 from flask import redirect, render_template, request, session
 import users
 import messages
+import secrets
 
 @app.route("/")
 def index():
@@ -28,6 +29,7 @@ def login():
     session["id"] = user[0]
     session["username"] = user[1]
     session["is_admin"] = user[3]
+    session["csrf_token"] = secrets.token_hex(16)
     return redirect("/")
 
 
@@ -94,8 +96,10 @@ def thread(forum_id, thread_id):
 
 @app.route("/new_forum", methods=["POST"])
 def new_forum():
-    user_id = session.get("id")
+    if session.get("csrf_token") != request.form["csrf_token"]:
+        return render_template("wrong.html", message = "Odottamaton virhe")
 
+    user_id = session.get("id")
     if not user_id or not users.is_admin(user_id):
         return render_template("wrong.html", message = "Sinulla ei ole oikeuksia luoda uutta foorumia")
 
@@ -110,12 +114,15 @@ def new_forum():
 
 @app.route("/new_thread", methods=["POST"])
 def new_thread():
+    if session.get("csrf_token") != request.form["csrf_token"]:
+        return render_template("wrong.html", message = "Odottamaton virhe")
+
     user_id = session.get("id")
     if user_id:
         forum_id = request.form["forum_id"]
         message = request.form["message"]
-        wrong = messages.create_thread(forum_id, message, user_id)
         
+        wrong = messages.create_thread(forum_id, message, user_id)
         if wrong:
             return render_template("wrong.html", message = wrong)
         
@@ -127,6 +134,9 @@ def new_thread():
 
 @app.route("/new_message", methods=["POST"])
 def new_message():
+    if session.get("csrf_token") != request.form["csrf_token"]:
+        return render_template("wrong.html", message = "Odottamaton virhe")
+
     user_id = session.get("id")
     if user_id:
         forum_id = request.form["forum_id"]

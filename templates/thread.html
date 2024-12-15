@@ -2,7 +2,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h2>Foorumi - {{thread.message}}</h2> 
+<h2>Viesti - {{thread.message}}</h2> 
 <a href="/forum/{{forum.id}}">Takaisin foorumiin</a>
 <br>
 <h3>Vastaukset</h3>
@@ -24,6 +24,7 @@
 
 <h3>Uusi viesti</h3>
 <form action="/new_message" method="POST">
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
     Viesti: <textarea name="message" maxlength="200" required></textarea>
     <input type="hidden" name="forum_id" value="{{forum.id}}">
     <input type="hidden" name="thread_id" value="{{thread.id}}">

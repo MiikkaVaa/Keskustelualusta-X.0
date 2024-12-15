@@ -54,6 +54,7 @@ def logout():
     del session["id"]
     del session["username"]
     del session["is_admin"]
+    del session["csrf_token"]
 
 
 # Onko admini
